@@ -1,4 +1,5 @@
 const express = require('express');
+const  RoutesUser  = require('./users');
 
 const router = express.Router();
 
@@ -26,5 +27,12 @@ router.patch('/update/:id', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
   res.send('Delete by ID API')
 })
+
+
+//users
+const routesUser = new RoutesUser(router);
+routesUser.getUser();
+routesUser.signUp();
+routesUser.signIn();
 
 module.exports = router;

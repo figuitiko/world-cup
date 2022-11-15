@@ -9,7 +9,11 @@ const betSchema = new Schema({
         type: Boolean,
     },    
     user: {type: Schema.Types.ObjectId, ref: 'user'}, 
-    game: {type: Schema.Types.ObjectId, ref: 'game'},  
+    game: {type: Schema.Types.ObjectId, ref: 'game'},
+    isSuccessful: {
+        type: Boolean,
+        default: false,
+    },  
 }, {  timestamps: true });
 
 module.exports = betSchema;
