@@ -1,16 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
+import React from 'react';
+import Home from './pages/Home';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ThemeProvider from 'react-bootstrap/ThemeProvider';
 
-function App() {
-  const [data, setData] = useState(null);
+function App() {  
   return (
-    <div className="App">
-      <div>
-        <label htmlFor="email">Enter your name: </label>
-        <input id="email" type="email"  />
-      </div>
-    </div>
+    <ThemeProvider
+    breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+    minBreakpoint="xxs"
+  >
+      <Home />
+      </ThemeProvider>
   );
 }
 
