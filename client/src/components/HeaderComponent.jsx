@@ -5,7 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 import NavComponent from './NavComponent';
-
+import LogoBox from './LogoBox';
+import logo from '../assets/img/logo.png';
 
 const HeaderComponent = () => {
   const [open, setOpen] = useState(false);
@@ -14,9 +15,9 @@ const HeaderComponent = () => {
       <Container>
         <Row>
           <Col>
-            <h1>My App</h1>
+            <LogoBox img={logo} />
           </Col>
-          <Col className='justify-content-end d-flex'>
+          <Col className='justify-content-end d-flex align-items-start'>
             <Button variant="secondary"
               onClick={() => setOpen(!open)}
               aria-controls="example-collapse-text"

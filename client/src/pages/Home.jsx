@@ -1,12 +1,13 @@
-import React from 'react'
- import HeaderComponent from '../components/HeaderComponent';
-     
 import CurrentGameComponent from '../components/CurrentGameComponent';
+import { useContext } from 'react';
+import context from '../context/context';
 
-const Home = () => {
+
+const Home = () => {  
+  const theContext = useContext(context);
+  console.log('theContext', theContext);
   return (
-    <>
-      <HeaderComponent />
+    <>     
       <main className='d-flex p-2 justify-content-center'>
         <CurrentGameComponent />
       </main>
