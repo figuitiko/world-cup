@@ -8,6 +8,7 @@ const gameSchema = new Schema({
     winner: {type: Schema.Types.ObjectId, ref: 'team'},
     isDraw: { type: Boolean },
     date: { type: Date, required: true },
+    result: {type: Schema.Types.ObjectId, ref: 'result'},
 }, {  timestamps: true });
 
 module.exports = gameSchema;

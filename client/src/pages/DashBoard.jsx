@@ -3,8 +3,8 @@ import { useContext } from 'react'
 import context from '../context/context'
 
 export const DashBoard = () => {
-  const thecontext = useContext(context);
-  console.log(thecontext);
+  const theContext = useContext(context);
+  
   return (
     <div>DashBoard</div>
   )

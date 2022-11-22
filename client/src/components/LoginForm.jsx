@@ -15,12 +15,12 @@ const LoginForm = () => {
   const { register, handleSubmit,  formState: { errors } } = useForm();
   const theContext = useContext(context);
   //  console.log( 'theContext,',theContext);
-  const {loginMutation} = useLogin();
+  const {loginMutation, error} = useLogin();
   
   // const { data} = useLogin();
   // console.log('data', data);
   const onSubmit = (data) =>{
-    console.log(data);  
+      
     loginMutation.mutate(data); 
     loginMutation.isSuccess && console.log('theContext in success',theContext);
    
@@ -44,9 +44,13 @@ const LoginForm = () => {
               <Form.Control {...register("password")} type="password" placeholder="Contraseña" />
             </Form.Group>           
             <Button variant="primary" type="submit">
-              Submit
+              Entrar
             </Button>
+            {
+              error && <p role="alert" className='alert alert-danger mt-1' >Error al iniciar sesión </p>
+            }
           </Form>
+
       }
           </Card>
   )

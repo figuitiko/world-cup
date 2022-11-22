@@ -6,8 +6,10 @@ export const initialState = {
     name: '',
     email: '',
     isLogged: false,
+    roles:[]
   },
   setUser: () => {},  
+  
 }
 
 const context = createContext();

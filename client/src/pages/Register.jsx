@@ -1,12 +1,13 @@
 import React from 'react'
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
+import RegisterFormComponent from '../components/RegisterFormComponent';
 
 const Register = () => {
   return (
     <Container>
-      <Row>
-        <h1>Register</h1>
+      <Row className='justify-content-center mt-5'>
+        <RegisterFormComponent />
       </Row>
     </Container>
   )

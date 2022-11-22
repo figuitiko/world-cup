@@ -1,12 +1,12 @@
 const jsonWebToken = require('jsonwebtoken');
 
-const verifyTokenAuth = (req, res, next) => {
+const verifyTokenAuth = (req, res, next) => {  
   const token = req.header('auth-token');
   if (!token) {
     return res.status(401).json('Access Denied');
   };
   try {
-    const verified = jsonWebToken.verify(token, process.env.JWT_SECRET);    
+    const verified = jsonWebToken.verify(token, process.env.SECRET_JWT_CODE);    
     req.user = verified;
     next();
   } catch (error) {
@@ -14,4 +14,4 @@ const verifyTokenAuth = (req, res, next) => {
   }
 };
 
-export default verifyTokenAuth;
+module.exports = verifyTokenAuth;

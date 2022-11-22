@@ -1,6 +1,7 @@
 const UserModel = require('../models/user/model');
 const bcrypt = require('bcrypt');
 const jsonWebToken = require('jsonwebtoken');
+const { notFound } = require('./util');
 
 class UserModelServices{
   constructor() {
@@ -38,13 +39,14 @@ class UserModelServices{
     try {
       const user = await this.userModel.findOne({ email });
       if (!user) {
-        throw new Error("User does not exist");
+        return { ok: false, error: "User does not exist"};
       };
       const isPasswordValid = await this.bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
-        throw new Error("Invalid password");
+        return { ok: false, error: "wrong password"};
       };
-      const token = this.jsonWebToken.sign({ id: user._id }, process.env.SECRET_JWT_CODE, {});
+      const token = this.jsonWebToken.sign({ email: user.email, name: user.name, roles: user.roles }, process.env.SECRET_JWT_CODE, {});
+      console.log(token);
       return { user, token };
     } catch (error) {
       console.log(error);

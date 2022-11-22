@@ -8,27 +8,48 @@ import Login from './pages/Login';
 import {  
   QueryClient,
   QueryClientProvider,
+  useQuery,
 } from 'react-query';
 import HeaderComponent from './components/HeaderComponent';
 import { ProtectRoutes } from './router/helper';
 import { DashBoard } from './pages/DashBoard';
+import Admin from './pages/Admin';
+import Register from './pages/Register';
 const queryClient = new QueryClient()
 function App() {
   const { Provider } = context;
   const [user, setUser] = useState(initialState.user);
-  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
-  const updateUser = useCallback( ( name, email)=>{
-    setUser((val)=> ({...val, name, email}));
+  
+  const value = useMemo(() => ({ user, setUser,  }), [user, setUser]);
+  const updateUser = useCallback( ( name, email, roles)=>{    
+    setUser((val)=> ({...val, name, email, roles, isLogged: true}));
   }, []);
-  useEffect(() => {
-    console.log('on app');
+  
+   const checkUser = useCallback( async ()=>{
     const token = localStorage.getItem('token');
-    const name = localStorage.getItem('name');
-    const email = localStorage.getItem('email');
-    if(token && name && email){     
-     updateUser(name, email)
-    }    
+    if(token){
+      try {
+        const response = await fetch('/api/users/checkUser', {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': token
+          } 
+        });
+        const data = await response.json();
+        
+         updateUser(data.name, data.email, data.roles);        
+      } catch (error) {
+        console.log(error);
+      }
+
+   }
   }, [updateUser]);
+  
+
+  useEffect(() => {    
+    checkUser();
+  }, [checkUser]);
 
   return (
     <ThemeProvider
@@ -41,8 +62,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route element={<ProtectRoutes />}>
               <Route path='/dashboard' element={<DashBoard />} />
+            </Route>
+            <Route element={<ProtectRoutes />}>
+              <Route path='/admin' element={<Admin />} />
             </Route>
           </Routes>
         </QueryClientProvider>

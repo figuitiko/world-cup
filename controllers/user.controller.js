@@ -9,17 +9,17 @@ const { notFound } = require("../services/util");
 
   async getUser(req, res) {   
     
-    const user = await this.userModelService.getUser(req.params.id);    
-    res.json(user);
+    const user = await this.userModelService.getUser(req.params.id);  
+    if(!user){
+      return notFound(0, "User does not exist");
+    }  
+   return Promise.resolve(user);
   }
   async signUp(req, res) {
     // console.log(Object.keys(req));return;
     const {body:{email,name, password}} = req;
     try {
-      const user = await this.userModelService.signUp(email,name, password);
-      if (user) {
-        return notFound(0, "User already exists");
-      }
+      const user = await this.userModelService.signUp(email,name, password);      
      return Promise.resolve(user);
     } catch (error) {
       console.log(error);
@@ -29,7 +29,7 @@ const { notFound } = require("../services/util");
     const {body:{email, password}} = req;
     try {
       const user = await this.userModelService.signIn(email, password);
-      if (!user) {
+      if (!user && user.error) {
         return notFound(0, "User does not exist");
       }
       return Promise.resolve(user);
