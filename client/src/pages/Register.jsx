@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
-import RegisterFormComponent from '../components/RegisterFormComponent';
+import RegisterFormComponent from '../components/login-register/RegisterFormComponent';
 
 const Register = () => {
   return (

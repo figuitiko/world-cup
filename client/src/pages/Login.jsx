@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/login-register/LoginForm';
 import { useContext } from 'react';
 import context from '../context/context';
 

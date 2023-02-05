@@ -8,7 +8,11 @@ export const initialState = {
     isLogged: false,
     roles:[]
   },
-  setUser: () => {},  
+  teams: [],
+  games: [],
+  setUser: () => {}, 
+  setTeams: () => {},
+  setGames: () => {},
   
 }
 

@@ -1,4 +1,4 @@
-import CurrentGameComponent from '../components/CurrentGameComponent';
+import CurrentGameComponent from '../components/home/CurrentGameComponent';
 import { useContext } from 'react';
 import context from '../context/context';
 

@@ -18,8 +18,18 @@ class RoutesTeam {
         }
       });
     }
+    getAllTeams(){
+      this.router.get('/teams', async(req, res)=>{        
+        try {
+          const rsp = await this.teamController.getAllTeams(req, res);        
+          successResponse(res, rsp); 
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    }
     addTeam(){
-      this.router.post('/teams/addTeam', async(req, res)=>{        
+      this.router.post('/teams', async(req, res)=>{        
         try {
           const rsp = await this.teamController.addTeam(req, res);        
           successResponse(res, rsp); 
@@ -28,6 +38,16 @@ class RoutesTeam {
         }
       });
     }
+    updateTeam(){
+      this.router.patch('/teams/:id', async(req, res)=>{        
+        try {
+          const rsp = await this.teamController.updateTeam(req, res);        
+          successResponse(res, rsp); 
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    };
 }
 
 module.exports = RoutesTeam;

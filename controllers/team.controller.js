@@ -5,12 +5,28 @@ class TeamController {
   constructor() {
     this.teamModelService = new TeamModelServices();
   }
-  getTeam(req, res) {
-    const team = this.teamModelService.getUser(req.params.id);
-    if(!team){
-      return notFound(0, "Team does not exist");
+  async getTeam(req, res) {
+    try {
+      const team = this.teamModelService.getTeam(req.params.id);
+      if (!team) {
+        return notFound(0, "Team does not exist");
+      }
+      return Promise.resolve(team);
+    } catch (error) {
+      console.log(error);
     }
-   return Promise.resolve(team);
+  }
+
+  async getAllTeams(req, res) {
+    try {
+      const teams = await this.teamModelService.getAllTeams();
+      if (!teams) {
+        return notFound(0, "Teams does not exist");
+      }
+      return Promise.resolve(teams);
+    } catch (error) {
+      console.log(error);
+    }
   }
   async addTeam(req, res) {
     const { body } = req;
@@ -24,6 +40,18 @@ class TeamController {
        } catch (error) {
         console.log(error);
        }
+  }
+  async updateTeam(req, res) {
+    const { body } = req;
+    try {
+      const team = await this.teamModelService.updateTeam(req.params.id, body);
+      if (!team) {
+        return notFound(0, "Team does not exist");
+      }
+      return Promise.resolve(team);
+    } catch (error) {
+      console.log(error);
+    }
   }
 } 
 
